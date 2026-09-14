@@ -3,59 +3,296 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LaunchTower — Factor Model Research</title>
+<title>LaunchTower — Factor Research & Market Data</title>
 <style>
-  :root { --bg:#0d1117; --card:#161b22; --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --green:#3fb950; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
-  .wrap { max-width:860px; margin:0 auto; padding:48px 24px; }
-  h1 { font-size:2rem; margin-bottom:8px; }
-  .sub { color:var(--muted); margin-bottom:32px; }
-  .card { background:var(--card); border:1px solid #30363d; border-radius:8px; padding:24px; margin-bottom:20px; }
-  .card h2 { font-size:1.1rem; margin-bottom:12px; }
-  a { color:var(--accent); text-decoration:none; }
-  a:hover { text-decoration:underline; }
-  .tag { display:inline-block; background:#1f6feb22; color:var(--accent); font-size:.75rem; padding:2px 8px; border-radius:12px; margin-bottom:12px; }
-  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-top:16px; }
-  .stat { background:#0d1117; border-radius:6px; padding:12px; text-align:center; }
-  .stat .num { font-size:1.4rem; font-weight:700; color:var(--green); }
-  .stat .lbl { font-size:.75rem; color:var(--muted); }
-  .disclaimer { font-size:.8rem; color:var(--muted); margin-top:32px; border-top:1px solid #30363d; padding-top:16px; }
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --border: #1f2937;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --green: #10b981;
+    --red: #ef4444;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 0.95rem;
+  }
+  nav a:hover { color: var(--text); }
+  .hero {
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--accent-hover); }
+  .cta-btn.secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    margin-left: 12px;
+  }
+  .cta-btn.secondary:hover { border-color: var(--muted); }
+  .section { padding: 60px 0; }
+  .section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .feature-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .feature-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 0.9rem;
+  }
+  .results-table th {
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .results-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .results-table tr:hover td { background: rgba(59, 130, 246, 0.05); }
+  .positive { color: var(--green); }
+  .negative { color: var(--red); }
+  .score { font-weight: 700; color: var(--accent); }
+  .disclaimer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 40px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .disclaimer strong { color: var(--text); }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>LaunchTower</h1>
-  <p class="sub">Independent market-data research. Dated, documented, reproducible.</p>
 
-  <div class="card">
-    <span class="tag">Latest Report</span>
-    <h2>Factor Model Report — 2026-09-14</h2>
-    <p>Momentum + quality composite scores across 81 US large/mid-cap equities. Data as of 2026-09-11.</p>
-    <div class="stats">
-      <div class="stat"><div class="num">81</div><div class="lbl">tickers</div></div>
-      <div class="stat"><div class="num">+62.7%</div><div class="lbl">top-20 12m</div></div>
-      <div class="stat"><div class="num">−3.8%</div><div class="lbl">max DD</div></div>
-      <div class="stat"><div class="num">4.3</div><div class="lbl">Sharpe (12m)</div></div>
+<header>
+  <div class="container header-inner">
+    <a href="#" class="logo">Launch<span>Tower</span></a>
+    <nav>
+      <a href="#methodology">Methodology</a>
+      <a href="#results">Results</a>
+      <a href="#get-pack">Get the Pack</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Transparent, Reproducible<br><span>Factor Research</span></h1>
+    <p>LaunchTower runs a momentum + quality factor screen on ~95 liquid US mega-cap equities. We publish the full factor table, the dated research report, and the exact code — so you can verify, reproduce, or build on our work.</p>
+    <a href="#get-pack" class="cta-btn">Get the Full Model Pack</a>
+    <a href="#results" class="cta-btn secondary">See Latest Results</a>
+  </div>
+</section>
+
+<section class="section" id="methodology">
+  <div class="container">
+    <h2>Methodology</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>Momentum (12-1) — 50%</h3>
+        <p>Return from t-252 to t-22, skipping the last month to avoid short-term reversal. Z-scored across the universe.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Quality (Sharpe) — 30%</h3>
+        <p>Annualized mean daily return / annualized daily vol, trailing 252 days. Gross Sharpe, rf = 0. Z-scored.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Low Volatility — 10%</h3>
+        <p>Inverse z-score of annualized realized vol, trailing 252 days. Lower vol = higher score.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Low Drawdown — 10%</h3>
+        <p>Inverse z-score of max drawdown from peak, trailing 252 days. Smaller drawdown = higher score.</p>
+      </div>
     </div>
-    <p style="margin-top:16px;">
-      <a href="https://raw.githubusercontent.com/pennypenguinapp-beep/launchtower-factor-reports/main/reports/2026-09-14_factor_report.md">Read the full report →</a><br>
-      <a href="https://raw.githubusercontent.com/pennypenguinapp-beep/launchtower-factor-reports/main/data/factor_scores_2026-09-14.csv">Download factor scores CSV →</a><br>
-      <a href="https://dev.to/penny_penguin_199601ef2a7/launchtower-factor-model-report-2026-09-14-81-us-large-caps-2bbb">Dev.to article →</a>
+    <div class="disclaimer">
+      <strong>Data source:</strong> Yahoo Finance (via yfinance), auto-adjusted daily closes, trailing ~3 years.<br>
+      <strong>Universe:</strong> 96 liquid US mega-cap names across tech, semis, industrials, energy, and consumer.<br>
+      <strong>Reproducibility:</strong> Fully deterministic given the same input data. Run the script and verify every number.
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container">
+    <h2>Latest Results (2026-09-15)</h2>
+    <h3 style="margin-bottom: 16px; color: var(--green);">Top 10 — Strongest Momentum + Quality</h3>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Ticker</th>
+          <th>Name</th>
+          <th>12M Ret</th>
+          <th>12-1 Mom</th>
+          <th>Sharpe</th>
+          <th>MaxDD 1Y</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>MU</td><td>Micron</td><td class="positive">+548.8%</td><td class="positive">+506.2%</td><td>2.71</td><td class="negative">-39.1%</td><td class="score">+2.512</td></tr>
+        <tr><td>2</td><td>LITE</td><td>Lumentum</td><td class="positive">+462.2%</td><td class="positive">+465.5%</td><td>2.27</td><td class="negative">-42.8%</td><td class="score">+2.160</td></tr>
+        <tr><td>3</td><td>WDC</td><td>Western Digital</td><td class="positive">+365.9%</td><td class="positive">+373.0%</td><td>2.33</td><td class="negative">-41.8%</td><td class="score">+1.837</td></tr>
+        <tr><td>4</td><td>STX</td><td>Seagate</td><td class="positive">+325.3%</td><td class="positive">+349.9%</td><td>2.31</td><td class="negative">-31.8%</td><td class="score">+1.698</td></tr>
+        <tr><td>5</td><td>INTC</td><td>Intel</td><td class="positive">+318.3%</td><td class="positive">+310.2%</td><td>2.19</td><td class="negative">-41.9%</td><td class="score">+1.526</td></tr>
+        <tr><td>6</td><td>AMAT</td><td>Applied Materials</td><td class="positive">+169.8%</td><td class="positive">+223.6%</td><td>1.97</td><td class="negative">-39.6%</td><td class="score">+1.166</td></tr>
+        <tr><td>7</td><td>TER</td><td>Teradyne</td><td class="positive">+229.2%</td><td class="positive">+249.0%</td><td>1.95</td><td class="negative">-34.0%</td><td class="score">+1.160</td></tr>
+        <tr><td>8</td><td>MRVL</td><td>Marvell</td><td class="positive">+255.3%</td><td class="positive">+226.7%</td><td>2.00</td><td class="negative">-48.4%</td><td class="score">+1.142</td></tr>
+        <tr><td>9</td><td>COHR</td><td>Coherent</td><td class="positive">+195.0%</td><td class="positive">+243.6%</td><td>1.71</td><td class="negative">-48.0%</td><td class="score">+1.114</td></tr>
+        <tr><td>10</td><td>AMD</td><td>AMD</td><td class="positive">+231.6%</td><td class="positive">+210.2%</td><td>2.03</td><td class="negative">-27.8%</td><td class="score">+0.992</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin: 32px 0 16px; color: var(--red);">Bottom 10 — Weakest Momentum + Quality</h3>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Ticker</th>
+          <th>Name</th>
+          <th>12M Ret</th>
+          <th>12-1 Mom</th>
+          <th>Sharpe</th>
+          <th>MaxDD 1Y</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>86</td><td>GRAB</td><td>Grab</td><td class="negative">-44.9%</td><td class="negative">-34.7%</td><td>-1.36</td><td class="negative">-53.3%</td><td class="score">-0.667</td></tr>
+        <tr><td>87</td><td>INTU</td><td>Intuit</td><td class="negative">-50.8%</td><td class="negative">-48.8%</td><td>-1.21</td><td class="negative">-63.4%</td><td class="score">-0.681</td></tr>
+        <tr><td>88</td><td>HUBS</td><td>HubSpot</td><td class="negative">-54.6%</td><td class="negative">-57.7%</td><td>-0.72</td><td class="negative">-67.4%</td><td class="score">-0.688</td></tr>
+        <tr><td>89</td><td>MSTR</td><td>MicroStrategy</td><td class="negative">-59.8%</td><td class="negative">-70.9%</td><td>-0.75</td><td class="negative">-77.1%</td><td class="score">-0.734</td></tr>
+        <tr><td>90</td><td>NKE</td><td>Nike</td><td class="negative">-48.9%</td><td class="negative">-44.3%</td><td>-1.67</td><td class="negative">-49.3%</td><td class="score">-0.803</td></tr>
+        <tr><td>91</td><td>RBLX</td><td>Roblox</td><td class="negative">-65.8%</td><td class="negative">-73.3%</td><td>-1.25</td><td class="negative">-74.9%</td><td class="score">-0.823</td></tr>
+        <tr><td>92</td><td>SMR</td><td>NuScale</td><td class="negative">-75.5%</td><td class="negative">-72.7%</td><td>-0.86</td><td class="negative">-85.8%</td><td class="score">-0.831</td></tr>
+        <tr><td>93</td><td>TTD</td><td>Trade Desk</td><td class="negative">-68.3%</td><td class="negative">-70.2%</td><td>-1.76</td><td class="negative">-75.9%</td><td class="score">-0.883</td></tr>
+        <tr><td>94</td><td>TME</td><td>Tencent Music</td><td class="negative">-68.0%</td><td class="negative">-66.1%</td><td>-2.19</td><td class="negative">-69.3%</td><td class="score">-0.968</td></tr>
+        <tr><td>95</td><td>MNSO</td><td>Mens Sana</td><td class="negative">-63.3%</td><td class="negative">-51.8%</td><td>-2.58</td><td class="negative">-63.3%</td><td class="score">-0.990</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="get-pack">
+  <div class="container">
+    <h2>Get the Full Model Pack</h2>
+    <p style="color: var(--muted); margin-bottom: 24px; max-width: 640px;">
+      The complete, reproducible model — the full 95-ticker factor table, the dated research report, the exact Python code, and the methodology documentation — in one place.
+    </p>
+    <div class="disclaimer" style="margin-top: 0; margin-bottom: 24px;">
+      <strong>What's included:</strong><br>
+      • Complete 95-ticker factor score dataset (CSV) from the 2026-09-15 screen<br>
+      • Full dated research report with top/bottom 10 analysis and interpretation<br>
+      • Self-contained Python script that reproduces the entire screen end-to-end<br>
+      • Methodology documentation: component definitions, weights, z-scoring, and data sources<br>
+      • CSV schema reference for every column
+    </div>
+    <a href="https://buy.stripe.com/test_bJeaEWgLd8o7etq7zr7AK3C" class="cta-btn">Get the LaunchTower Full Model Pack ($49)</a>
+    <p style="margin-top: 16px; color: var(--muted); font-size: 0.9rem;">One-time purchase. No subscription. No lock-in. Run it, verify it, build on it.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>LaunchTower — independent market-data research. Not investment advice.</p>
+    <p style="margin-top: 8px;">
+      <a href="https://github.com/pennypenguinapp-beep/launchtower-factor-reports">GitHub</a>
     </p>
   </div>
+</footer>
 
-  <div class="card">
-    <h2>Methodology</h2>
-    <p>12-1 momentum, 3-month return, annualized volatility, ROA, beta, and log market cap — each z-scored cross-sectionally and combined into a composite score. Full definitions and the exact formula are in the report.</p>
-  </div>
-
-  <div class="card">
-    <h2>All Reports &amp; Data</h2>
-    <p><a href="https://github.com/pennypenguinapp-beep/launchtower-factor-reports">GitHub repo →</a></p>
-  </div>
-
-  <p class="disclaimer">LaunchTower is independent research and data, not investment advice, not a recommendation, and not a promise of performance. Past factor performance does not guarantee future results.</p>
-</div>
 </body>
 </html>
