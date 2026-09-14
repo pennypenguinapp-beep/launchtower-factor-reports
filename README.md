@@ -19,11 +19,7 @@ Want the complete, reproducible model — the full 95-ticker factor table,
 the dated research report, the exact Python code, and the methodology
 documentation — in one place?
 
-**[→ Get the LaunchTower Full Model Pack ($29)](https://whop.com/biz_PafLwqOjrf2HRB/)**
-
-> **Note:** A live checkout link is pending a Whop store configuration fix
-> (default currency). The store page above is live. Once the checkout link
-> is active, it will appear here.
+**[→ Get the LaunchTower Full Model Pack ($49)](https://buy.stripe.com/test_bJeaEWgLd8o7etq7zr7AK3C)**
 
 What's included:
 - The complete 95-ticker factor score dataset (CSV) from the 2026-09-15 screen
@@ -67,7 +63,7 @@ dividend adjusted) daily closes, trailing ~3 years.
 
 **Universe:** 96 liquid US mega-cap names across tech, semis, industrials,
 energy, and consumer. Names with fewer than 252 trading days of history are
-dropped automatically.
+dropped automatically (OTIV is the known exclusion).
 
 ---
 
@@ -182,7 +178,13 @@ The screen is re-run **monthly** (first trading day of each month). Each
 run produces:
 - A new dated CSV in `data/`
 - A new dated report in `reports/`
-- The same self-contained script (no version churn)
+- The latest link at the top of this README
+
+---
+
+## License
+
+MIT — see `LICENSE`.
 
 ---
 
