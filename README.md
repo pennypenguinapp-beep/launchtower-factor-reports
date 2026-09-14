@@ -53,11 +53,13 @@ out = out.sort_values("score", ascending=False).round(4)
 Includes: dated factor dataset (CSV), full research report (Markdown),
 reproduction script (Python), and this repo.
 
-> ⚠️ **Checkout status (2026-09-16):** The Whop product object exists
-> (`prod_62MnGDMxlvZUg`) but the checkout/plan has not yet been activated
-> due to a currency-field integration gap on the listing tool. A live
-> purchase link will appear here as soon as it is resolved.
-> Store: https://whop.com/biz_PafLwqOjrf2HRB/
+> **Store:** https://whop.com/biz_PafLwqOjrf2HRB/
+>
+> ⚠️ **Checkout status (2026-09-16):** The product is listed on the store,
+> but a live checkout link is temporarily unavailable due to a currency-field
+> integration issue on the listing tool (Whop requires a currency on the plan;
+> the tool is not sending one). A direct purchase link will appear here as soon
+> as it is resolved. You can browse the store above in the meantime.
 
 ## Disclaimer
 
