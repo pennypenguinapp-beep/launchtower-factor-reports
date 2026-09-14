@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaunchTower — Factor Model Research</title>
+<style>
+  :root { --bg:#0d1117; --card:#161b22; --text:#e6edf3; --muted:#8b949e; --accent:#58a6ff; --green:#3fb950; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+  .wrap { max-width:860px; margin:0 auto; padding:48px 24px; }
+  h1 { font-size:2rem; margin-bottom:8px; }
+  .sub { color:var(--muted); margin-bottom:32px; }
+  .card { background:var(--card); border:1px solid #30363d; border-radius:8px; padding:24px; margin-bottom:20px; }
+  .card h2 { font-size:1.1rem; margin-bottom:12px; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .tag { display:inline-block; background:#1f6feb22; color:var(--accent); font-size:.75rem; padding:2px 8px; border-radius:12px; margin-bottom:12px; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-top:16px; }
+  .stat { background:#0d1117; border-radius:6px; padding:12px; text-align:center; }
+  .stat .num { font-size:1.4rem; font-weight:700; color:var(--green); }
+  .stat .lbl { font-size:.75rem; color:var(--muted); }
+  .disclaimer { font-size:.8rem; color:var(--muted); margin-top:32px; border-top:1px solid #30363d; padding-top:16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>LaunchTower</h1>
+  <p class="sub">Independent market-data research. Dated, documented, reproducible.</p>
+
+  <div class="card">
+    <span class="tag">Latest Report</span>
+    <h2>Factor Model Report — 2026-09-14</h2>
+    <p>Momentum + quality composite scores across 81 US large/mid-cap equities. Data as of 2026-09-11.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">81</div><div class="lbl">tickers</div></div>
+      <div class="stat"><div class="num">+62.7%</div><div class="lbl">top-20 12m</div></div>
+      <div class="stat"><div class="num">−3.8%</div><div class="lbl">max DD</div></div>
+      <div class="stat"><div class="num">4.3</div><div class="lbl">Sharpe (12m)</div></div>
+    </div>
+    <p style="margin-top:16px;">
+      <a href="https://raw.githubusercontent.com/pennypenguinapp-beep/launchtower-factor-reports/main/reports/2026-09-14_factor_report.md">Read the full report →</a><br>
+      <a href="https://raw.githubusercontent.com/pennypenguinapp-beep/launchtower-factor-reports/main/data/factor_scores_2026-09-14.csv">Download factor scores CSV →</a><br>
+      <a href="https://dev.to/penny_penguin_199601ef2a7/launchtower-factor-model-report-2026-09-14-81-us-large-caps-2bbb">Dev.to article →</a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Methodology</h2>
+    <p>12-1 momentum, 3-month return, annualized volatility, ROA, beta, and log market cap — each z-scored cross-sectionally and combined into a composite score. Full definitions and the exact formula are in the report.</p>
+  </div>
+
+  <div class="card">
+    <h2>All Reports &amp; Data</h2>
+    <p><a href="https://github.com/pennypenguinapp-beep/launchtower-factor-reports">GitHub repo →</a></p>
+  </div>
+
+  <p class="disclaimer">LaunchTower is independent research and data, not investment advice, not a recommendation, and not a promise of performance. Past factor performance does not guarantee future results.</p>
+</div>
+</body>
+</html>
